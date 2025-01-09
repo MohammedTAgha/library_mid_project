@@ -36,8 +36,8 @@ class LibraryController extends Controller
        
         $validated = $request->validate([
             'name' => 'required|string',
-            'publish_date' => 'required|date|before:today',
-            'author' => 'required|string',
+            'publish_date' => 'nullable|date',
+            'author' => 'nullable|string',
             'image' => 'nullable|image',
         ]);
 

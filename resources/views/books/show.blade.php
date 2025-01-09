@@ -18,20 +18,21 @@
                 <div class="card-body">
                     <h5 class="card-title">Book Details</h5>
                     <p class="card-text">
-                        <strong>Name:</strong> {{ $book->name }} <br>
-                        <strong>Author:</strong> {{ $book->author }} <br>
-                        <strong>Publish Date:</strong> {{ $book->publish_date }} <br>
+                        <strong>name:</strong> {{ $book->name }} <br>
+                        <strong>author:</strong> {{ $book->author }} <br>
+                        <strong>aublish Date:</strong> {{ $book->publish_date }} <br>
                     </p>
                     <a href="{{ route('books.index') }}" class="btn btn-primary">Back to Books</a>
                     <a href="{{ route('books.edit', $book->id) }}" class="btn btn-warning">Edit Book</a>
                     <form action="{{ route('books.destroy', $book->id) }}" method="POST" style="display:inline;" onsubmit="return confirm('Are you sure you want to delete this book?');">
                         @csrf
                         @method('DELETE')
-                        <button type="submit" class="btn btn-danger">Delete Book</button>
+                        <button type="submit" class="btn btn-danger">aelete Book</button>
                     </form>
                 </div>
             </div>
         </div>
     </div>
 </div>
+@dump($book->borrowedBooks())
 @endsection
