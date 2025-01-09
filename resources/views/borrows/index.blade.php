@@ -4,13 +4,7 @@
 <div class="container">
     <h1>Borrowed Books</h1>
 
-    @if (session('success'))
-    <div class="alert alert-success alert-dismissible fade show" role="alert">
-        {{ session('success') }}
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
-    @endif
-
+    
     @if ($borrowedBooks->isEmpty())
         <p>No borrowed books found.</p>
     @else
