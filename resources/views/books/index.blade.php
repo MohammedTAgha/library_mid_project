@@ -5,41 +5,37 @@
     <h1>showing avilable books</h1>
     {{-- @dump($books); --}}
     <div class="container">
-        <h1>Books</h1>
+         
         <a href="{{ route('books.create') }}" class="btn btn-primary mb-3">Add New Book</a>
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Publish Date</th>
-                    <th>Author</th>
-                    <th>Image</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($books as $book)
-                <tr>
-                    <td>{{ $book->name }}</td>
-                    <td>{{ $book->publish_date }}</td>
-                    <td>{{ $book->author }}</td>
-                    <td>
-                        @if ($book->image)
-                        <img src="{{ asset('storage/' . $book->image) }}" alt="Book Image" style="width: 50px;">
-                        @endif
-                    </td>
-                    <td>
+        <div class="row">
+        @foreach ($books as $book)
+        <div class="col-md-4 mb-4">
+            <div class="card h-100">
+                @if ($book->image)
+                <img src="{{ asset('storage/' . $book->image) }}" class="card-img-top" alt="{{ $book->name }}">
+                @else
+                <img src="https://via.placeholder.com/150" class="card-img-top" alt="No Image">
+                @endif
+                <div class="card-body">
+                    <h5 class="card-title"><a  href="{{ route('books.show', $book->id) }}">{{ $book->name }}</a></h5>
+                    <p class="card-text">
+                        <strong>Author:</strong> {{ $book->author }}<br>
+                        <strong>Publish Date:</strong> {{ $book->publish_date }}
+                    </p>
+                    <div class="d-flex justify-content-between">
+                        <a href="{{ route('books.show', $book->id) }}" class="btn btn-warning btn-sm">diatails</a>
                         <a href="{{ route('books.edit', $book->id) }}" class="btn btn-warning btn-sm">Edit</a>
-                        <form action="{{ route('books.destroy', $book->id) }}" method="POST" style="display:inline-block;">
+                        <form action="{{ route('books.destroy', $book->id) }}" method="POST" onsubmit="return confirm('Are you sure?');">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-danger btn-sm">Delete</button>
                         </form>
-                    </td>
-                </tr>
-                @endforeach
-            </tbody>
-        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @endforeach
+        </div>
     </div>
     <!-- Page content here -->
 </div>

@@ -18,6 +18,10 @@ class LibraryController extends Controller
         return view('books.index', compact('books'));
     }
 
+    public function show($id){
+        $book = BookMohammedAgha::findOrFail($id);
+        return(view('books.show',compact('book')));
+    }
     public function create()
     {
         return view('books.create');
@@ -37,12 +41,17 @@ class LibraryController extends Controller
             'image' => 'nullable|image',
         ]);
 
-        if ($request->hasFile('image')) { // store it in the database
+        if ($request->hasFile('image')) { 
             $validated['image'] = $request->file('image')->store('book_images', 'public');
         }
 
         $book = BookMohammedAgha::create($validated);
-        return response()->json($book);
+        // return response()->json($book);
+        try {
+            return redirect()->route('books.index')->with('success', 'Book '.$book->name.'added successfully!');
+        } catch (\Throwable $th) {
+            return redirect()->route('books.index')->with('success', 'Book added successfully!');
+        }
     }
 
     public function update(Request $request, $id)
@@ -62,7 +71,12 @@ class LibraryController extends Controller
         }
 
         $book->update($validated);
-        return response()->json($book);
+         // return response()->json($book);
+         try {
+            return redirect()->route('books.index')->with('success', 'Book '.$book->name.'updated successfully!');
+        } catch (\Throwable $th) {
+            return redirect()->route('books.index')->with('success', 'Book updated successfully!');
+        }
     }
 
     public function destroy($id)
@@ -71,7 +85,11 @@ class LibraryController extends Controller
         $book = BookMohammedAgha::findOrFail($id);
         $book->delete();
 
-        return response()->json(['message' => 'Book deleted successfully']);
+        try {
+            return redirect()->route('books.index')->with('success', 'Book '.$book->name.'deleted successfully!');
+        } catch (\Throwable $th) {
+            return redirect()->route('books.index')->with('success', 'Book deleted successfully!');
+        }
     }
 
     // Borrowed Books Operations
