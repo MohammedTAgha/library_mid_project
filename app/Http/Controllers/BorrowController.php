@@ -12,34 +12,36 @@ class BorrowController  extends Controller
 
     public function index()
 {
-    $books = BookMohammedAgha::all();
-    return view('borrows.create', compact('books'));
+    $borrowedBooks = BorrowedBookMohammedAgha::with('book')->get();
+    return view('borrows.index', compact('borrowedBooks'));
 }
 public function store(Request $request)
 {
     $validated = $request->validate([
-        'book_id' => 'required|exists:book_mohammed_aghas,id',
+        'book_id' => 'required',
         'borrower_name' => 'required|string',
         'borrower_mobile' => 'required|string',
         'borrow_end_date' => 'required|date|after:today',
     ]);
 
-    // Check if the book is already borrowed
-    if (BorrowedBookMohammedAgha::where('book_id', $validated['book_id'])->exists()) {
-        return redirect()->back()->withErrors(['book_id' => 'This book is already borrowed.']);
-    }
+    
 
     // Save the borrowed book record
     BorrowedBookMohammedAgha::create($validated);
 
-    return redirect()->route('books.index')->with('success', 'Book borrowed successfully!');
+    return redirect()->route('borrows.index')->with('success', 'Book borrowed successfully!');
 }
-
     public function create()
 {
     $books = BookMohammedAgha::all();
     return view('borrows.create', compact('books'));
 }
+public function destroy($id)
+{
+    $borrowedBook = BorrowedBookMohammedAgha::findOrFail($id);
+    $borrowedBook->delete();
 
+    return redirect()->route('borrows.index')->with('success', 'Borrowed book record deleted successfully!');
+}
 
 }

@@ -6,7 +6,7 @@
     {{-- @dump($books); --}}
     <div class="container">
          
-        <a href="{{ route('books.create') }}" class="btn btn-primary mb-3">Add New Book</a>
+        <a href="{{ route('new') }}" class="btn btn-primary mb-3">Add New Book</a>
         <div class="row">
         @foreach ($books as $book)
         <div class="col-md-4 mb-4">

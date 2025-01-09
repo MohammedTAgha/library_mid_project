@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('borrowed_book_mohammed_aghas', function (Blueprint $table) { // iadd s because the migration comprihonsion 
+        Schema::create('borrowed_books_mohammed_agha', function (Blueprint $table) { // iadd s because the migration comprihonsion 
 
             $table->id();
             
@@ -27,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('borrowed_book_mohammed_aghas');
+        Schema::dropIfExists('borrowed_books_mohammed_agha');
     }
 };

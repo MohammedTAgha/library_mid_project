@@ -21,10 +21,13 @@
                         <a class="nav-link" href="{{ route('books.index') }}">Books</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('books.create') }}">Add Book</a>
+                        <a class="nav-link" href="{{ route('new') }}">Add Book</a>
                     </li>
                     <li class="nav-item">
-                        {{-- <a class="nav-link" href="{{ route('borrowed.books') }}">Borrowed Books</a> --}}
+                        <a class="nav-link" href="{{ route('borrows.index') }}">Borrowed Books</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('borrows.create') }}">get a book</a>
                     </li>
                 </ul>
             </div>
@@ -46,11 +49,7 @@
         </div>
     </main>
 
-    <!-- Footer -->
-    <footer class="bg-dark text-white text-center py-3 mt-auto">
-        <p class="mb-0">Library Management &copy; {{ date('Y') }}. All rights reserved.</p>
-    </footer>
-
+    
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
