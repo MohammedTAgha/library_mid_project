@@ -34,5 +34,5 @@
         </div>
     </div>
 </div>
-@dump($book->borrowedBooks())
+{{-- @dump($book->borrowedBooks()) --}}
 @endsection
